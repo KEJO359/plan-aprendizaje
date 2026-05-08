@@ -1,0 +1,38 @@
+	drop delimiter $$
+drop procedure if exists registrar_laboratorio $$
+create procedure registrar_laboratorio (IN UMAnombre varchar(45),in UMAubicacion varchar(45),in UMAidLaboratorio smallint)
+begin 
+		insert into Laboratorio (nombre ,ubicacion , idLaboratorio )
+        values (UMAnombre, UMAubicacion, UMAidLaboratorio );
+
+end$$
+
+
+drop delimiter $$
+drop procedure if exists registrar_modelo_pc $$
+create procedure registrar_modelo_pc (in UMAmarca varchar(45), in UMAmodelo varchar(45), in UMAram int,in UMAprocesador varchar(45),
+																											in UMAidModeloPC smallint)
+begin 
+		insert into ModeloPC( marca , modelo , ram , procesador,idModeloPC )
+        values (UMAmarca, UMAmodelo, UMAram, UMAprocesador, UMAidModeloPC );
+end$$
+
+drop delimiter $$
+drop procedure if exists registrar_computadora $$
+create procedure registrar_computadora (in UMAnombre varchar(45), in UMAsisTeMaOPERAtivO varchar(45), in UMAidLaboratorio smallint,
+																										in UMAidModeloPC smallint)
+begin 
+		insert into Computadora(nombre, sisTeMaOPERAtivO ,idLaboratorio ,idModeloPC )
+        values (UMAnombre, UMAsisTeMaOPERAtivO, UMAidLaboratorio, UMAidModeloPC );
+end$$
+
+
+
+drop delimiter $$
+drop procedure if exists registrar_medicion $$
+create procedure registrar_medicion (in UMAcp_u int, in UMAram int, in UMAtemperatura int, in UMAfechaHora date, in UMAconectado bool,
+																									in UMAidMediciones smallint)
+begin 
+		insert into Mediciones(cp_u, ram, temperatura, fechaHora, conectado, idMediciones)
+        values (UMAcp_u, UMAram, UMAtemperatura, UMAfechaHora, UMAconectado, UMAidMediciones );
+end$$

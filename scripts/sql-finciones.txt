@@ -1,0 +1,31 @@
+drop DELIMITER $$
+drop function if Exists calcular_estado$$
+CREATE FUNCTION calcular_estado (unTemperatura int , unIdMedicion int)	RETURNs  VARCHAR(45)		
+																
+BEGIN 
+DECLARE Estado varchar(45);
+select 
+		case
+			when untemperatura < 60 then "Normal"
+			when untemperatura between 60 and 90 then "WARNING"
+            when untemperatura > 90 then "critico"
+		end into Estado
+        from Mediciones
+        where idMediciones = unIdMedicion;
+        RETURN Estado;
+END$$
+
+
+
+
+drop DELIMITER $$
+drop function if Exists promedio_temperatura$$
+CREATE FUNCTION promedio_temperatura(unTemperatura int , unIdMedicion int)	RETURNs float
+																
+BEGIN 
+DECLARE promedio varchar(45);
+		select AVG(temperatura) into promedio
+        from Mediciones
+        where idMediciones = unIdMedicion;
+        RETURN Estado;
+END$$

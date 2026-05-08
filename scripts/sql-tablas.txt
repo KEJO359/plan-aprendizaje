@@ -1,0 +1,38 @@
+drop database if exists 5to_monitoreo;
+create database 5to_monitoreo;
+use 5to_monitoreo;
+
+create table Laboratorio (
+	nombre varchar(45) not null,
+    ubicacion varchar(45) not null,
+    idLaboratorio smallint not null,
+    constraint PK_Laboratorio primary key(idLaboratorio)
+);
+create table ModeloPC(
+	marca varchar(45) not null, 
+    modelo varchar(45) not null,
+    ram int not null,
+    procesador varchar(45) not null,
+    idModeloPC smallint not null,
+    constraint PK_ModeloPC primary key(idModeloPC)
+);
+create table Mediciones(
+	cp_u int not null,
+    ram int not null,
+    temperatura int not null,
+    fechaHora date not null,
+    conectado bool not null,
+    idMediciones smallint not null,
+    constraint PK_Mediciones primary key(idMediciones)
+);
+create table Computadora(
+	nombre varchar(45) not null,
+    sisTeMaOPERAtivO varchar(45) not null,
+    idLaboratorio smallint not null,
+    idModeloPC smallint not null,
+    constraint PK_Computadora primary key(idModeloPC, idLaboratorio),
+    constraint FK_Computadora_ModeloPC foreign key (idModeloPC)
+		references ModeloPC(idModeloPC),
+    constraint FK_Computadora_Laboratorio foreign key (idLaboratorio)
+		references Laboratorio(idLaboratorio)
+    )
